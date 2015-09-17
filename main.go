@@ -57,7 +57,7 @@ func main() {
 		log.Println(http.ListenAndServe("localhost:6060", nil))
 	}()
 
-	for i := 0; i < 10000000; i++ {
+	for i := 0; i < 1000000; i++ {
 		it := Item(i)
 		s := strconv.FormatInt(int64(i), 10)
 		h1.objects[s] = &it
