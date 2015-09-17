@@ -32,7 +32,7 @@ func main() {
 
 	fmt.Println("Setup")
 
-	http.Handle("/debug/pprof/myheap", http.HandlerFunc(func(rw http.ResponseWriter, req*http.Request) {
+	http.Handle("/debug/pprof/heapdump", http.HandlerFunc(func(rw http.ResponseWriter, req*http.Request) {
 		f, err := ioutil.TempFile("", "dump")
 		if err != nil {
 			rw.WriteHeader(http.StatusServiceUnavailable)
@@ -50,6 +50,7 @@ func main() {
 			io.WriteString(rw, err.Error())
 			return
 		}
+		defer f2.Close()
 		io.Copy(rw, f2)
 	}))
 
